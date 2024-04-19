@@ -64,7 +64,7 @@ python3 -m src.eval
 ```text
 @inproceedings{
     lu2024fact,
-    title={{FACT}: Frame-Action Cross-Attention Temporal Modeling for Efficient Fully-Supervised Action Segmentation},
+    title={{FACT}: Frame-Action Cross-Attention Temporal Modeling for Efficient Supervised Action Segmentation},
     author={Zijia Lu and Ehsan Elhamifar},
     booktitle={Conference on Computer Vision and Pattern Recognition 2024},
     year={2024},
