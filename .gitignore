@@ -1,0 +1,9 @@
+*.pyc
+build
+cpp/CMakeLists.txt
+cpp/lib
+test.py
+*/build
+.vscode/settings.json
+ipynb
+old
