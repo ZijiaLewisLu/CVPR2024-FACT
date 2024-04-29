@@ -37,13 +37,13 @@ The training is configured using YAML, and all the configurations are listed in 
 ```shell
 cd FACT_actseg
 # breakfast
-python3 -m src.train --cfg src/configs/breakfast.yaml --set gpu 0 split "split1"
+python3 -m src.train --cfg src/configs/breakfast.yaml --set aux.gpu 0 split "split1"
 # gtea
-python3 -m src.train --cfg src/configs/gtea.yaml --set gpu 0 split "split1"
+python3 -m src.train --cfg src/configs/gtea.yaml --set aux.gpu 0 split "split1"
 # egoprocel
-python3 -m src.train --cfg src/configs/egoprocel.yaml --set gpu 0 split "split1"
+python3 -m src.train --cfg src/configs/egoprocel.yaml --set aux.gpu 0 split "split1"
 # epic-kitchens
-python3 -m src.train --cfg src/configs/epic-kitchens.yaml --set gpu 0 split "split1"
+python3 -m src.train --cfg src/configs/epic-kitchens.yaml --set aux.gpu 0 split "split1"
 ```
 By default, log will be saved to `FACT_actseg/log/<experiment-path>`. Evaluation results are saved as `Checkpoint` objects defined [utils/evaluate.py](./utils/evaluate.py). Loss and metrics are also visualized with wandb.
 
