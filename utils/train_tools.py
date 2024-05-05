@@ -73,10 +73,7 @@ def compute_null_weight(cfg, dataset):
 def save_results(ckpt: Checkpoint, vnames: list, label_list: list, attrs_saves: list) -> list:
     videos = []
     for i in range(len(vnames)):
-        video = Video(vnames[i])
-        video.gt_label = to_numpy(label_list[i])
-        for k, a in attrs_saves[i].items():
-            setattr(video, k, a)
+        video = Video(vnames[i], gt_label=to_numpy(label_list[i]), **attrs_saves[i])
         videos.append(video)
     ckpt.add_videos(videos)
     return videos

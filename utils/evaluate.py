@@ -69,8 +69,10 @@ def f_score(pred_segs, gt_segs, overlap, bg_class=["background"]):
 
 class Video():
     
-    def __init__(self, vname=''):
+    def __init__(self, vname='', **kwargs):
         self.vname = vname
+        for k, v in kwargs.items():
+            setattr(self, k, v)
     
     def __str__(self):
         return "< Video %s >" % self.vname

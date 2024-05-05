@@ -18,7 +18,7 @@ from .models.loss import MatchCriterion
 def evaluate(global_step, net, testloader, run, savedir):
     print("TESTING" + "~"*10)
 
-    ckpt = Checkpoint(global_step+1, bg_class=(testloader.dataset.bg_class if net.cfg.eval_bg else []))
+    ckpt = Checkpoint(global_step+1, bg_class=([] if net.cfg.eval_bg else testloader.dataset.bg_class))
     net.eval()
     with torch.no_grad():
         for batch_idx, (vnames, seq_list, train_label_list, eval_label_list) in enumerate(testloader):
@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
     ### start training #########################################################
     start_epoch = global_step // len(trainloader)
-    ckpt = Checkpoint(-1, bg_class=(dataset.bg_class if cfg.eval_bg else []), eval_edit=False)
+    ckpt = Checkpoint(-1, bg_class=([] if net.cfg.eval_bg else testloader.dataset.bg_class), eval_edit=False)
     best_ckpt, best_metric = None, 0
 
     print(f'Start Training from Epoch {start_epoch}...')
