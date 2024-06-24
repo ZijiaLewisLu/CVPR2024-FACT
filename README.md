@@ -1,5 +1,5 @@
 <!-- # CVPR2024-FACT -->
-<h2 align="center"> <a href="">FACT: Frame-Action Cross-Attention Temporal Modeling for Efficient Supervised Action Segmentation</a></h2>
+<h2 align="center"> <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Lu_FACT_Frame-Action_Cross-Attention_Temporal_Modeling_for_Efficient_Action_Segmentation_CVPR_2024_paper.html">FACT: Frame-Action Cross-Attention Temporal Modeling for Efficient Supervised Action Segmentation</a></h2>
 
 <!-- https://img.shields.io/badge/any_text-you_like-blue -->
 
