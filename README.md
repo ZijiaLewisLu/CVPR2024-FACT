@@ -57,7 +57,7 @@ python3 -m src.eval
 - [x] Breakfast models
 - [x] GTEA models
 - [x] EgoProceL models
-- [ ] Epic-Kitchens models
+- [x] Epic-Kitchens models
 
 
 ## Citation
