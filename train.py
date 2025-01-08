@@ -186,6 +186,7 @@ if __name__ == '__main__':
                 test_ckpt = evaluate(global_step, net, testloader, run, savedir)
                 if test_ckpt.metrics['F1@0.50'] >= best_metric:
                     best_ckpt = test_ckpt
+                    best_metric = test_ckpt.metrics['F1@0.50']
 
                 network_file = ckptdir + '/network.iter-' + str(global_step+1) + '.net'
                 net.save_model(network_file)

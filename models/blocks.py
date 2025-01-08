@@ -213,10 +213,16 @@ class Block(nn.Module):
         return prob.argmax(1)
 
     @staticmethod
-    def _eval_w_transcript(transcript, a2f_attn):
+    def _eval_w_transcript(transcript, a2f_attn, frame_clogit, weight):
+        fbranch_prob = torch.softmax(frame_clogit.squeeze(1), dim=-1)
+        fbranch_prob = fbranch_prob[:, transcript] 
+
         N = len(transcript)
         a2f_attn = a2f_attn[0, :, :N] # 1, f, a -> f, s'
-        pred = a2f_attn.argmax(1) # f
+        abranch_prob = torch.softmax(a2f_attn, dim=-1) # f, s'
+
+        prob = (1-weight) * abranch_prob + weight * fbranch_prob
+        pred = prob.argmax(1) # f
         pred = transcript[pred]
         return pred
 
@@ -224,7 +230,7 @@ class Block(nn.Module):
         if not self.cfg.FACT.trans:
             return self._eval(self.action_clogit, self.a2f_attn, self.frame_clogit, self.cfg.FACT.mwt)
         else:
-            return self._eval_w_transcript(transcript, self.a2f_attn)
+            return self._eval_w_transcript(transcript, self.a2f_attn, self.frame_clogit, self.cfg.FACT.mwt)
 
 
 class InputBlock(Block):
