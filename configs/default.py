@@ -16,7 +16,7 @@ _C.aux.eval_every = 1000
 _C.aux.print_every = 200
 
 # dataset
-_C.dataset = "breakfast"
+_C.dataset = "fsjump"
 _C.split = "split1"
 _C.sr = 1 # temporal down-sample rate
 _C.eval_bg = False # if including background frame in evaluation
@@ -103,7 +103,7 @@ Loss.pc = 1.0 # match weight for prob
 Loss.a2fc = 1.0 # match weight for a2f_attn overlap
 Loss.match = 'o2o' # one-to-one(o2o) or one-to-many(o2m)
 Loss.bgw = 1.0 # weight for background class
-Loss.nullw = -1.0 # weight for null class in action token; -1 -> auto-compute from statistic
+Loss.nullw = -1 # weight for null class in action token; -1 -> auto-compute from statistic
 Loss.sw = 0.0 # weight for smoothing loss
 
 #########################

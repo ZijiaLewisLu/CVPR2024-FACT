@@ -1,0 +1,36 @@
+dataset: fsjump
+batch_size: 4
+epoch: 10
+lr: 0.0005
+lr_decay: 5
+momentum: 0.9
+weight_decay: 0.0001
+clip_grad_norm: 1.0
+optimizer: Adam
+
+Loss:
+  match: o2o
+  nullw: -1  # Explicitly set as an integer
+  bgw: 0.1
+  a2fc: 1.0
+  pc: 1.0
+ 
+train:
+  max_frames: 256
+
+data:
+  train_list: data/fsjump/train.txt
+  val_list: data/fsjump/val.txt
+  test_list: data/fsjump/test.txt
+  feature_dir: data/fsjump/features
+  label_dir: data/fsjump/labels
+
+aux:
+  gpu: 0
+  debug: true  # Set to false later for real training
+  print_every: 5
+  eval_every: 20
+  wandb_project: fact-fsjump
+  wandb_user: your_username  # Replace with your wandb user
+  logdir: logs/fsjump/
+  exp: dryrun

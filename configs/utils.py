@@ -170,6 +170,7 @@ def _get_var(c, ks: list, delete=False):
 #     return cfg
 
 def setup_cfg(cfg_file=[], set_cfgs=None, default: CfgNode=None, logdir="log/") -> CfgNode:
+    print("✅ setup_cfg() is called!")
     """
     update default cfg according to cmd line input
     and automatic generate experiment name
@@ -179,6 +180,19 @@ def setup_cfg(cfg_file=[], set_cfgs=None, default: CfgNode=None, logdir="log/") 
         cfg = get_cfg_defaults()
     else:
         cfg = default.clone()
+
+    # Force the conversion of nullw before merging the config file
+    if hasattr(cfg.Loss, "nullw"):
+        if isinstance(cfg.Loss.nullw, float):
+            print(f"Converting Loss.nullw from float: {cfg.Loss.nullw} to int")
+            cfg.Loss.nullw = int(cfg.Loss.nullw)
+
+    # Load config file
+    for f in cfg_file:
+        print(f"Loading config file: {f}")  # Debug statement to check if the file is being loaded
+        cfg.merge_from_file(f)
+
+    
 
     # preprocess set_cfgs to convert int2float
     L = len(set_cfgs) if set_cfgs else 0
@@ -198,6 +212,11 @@ def setup_cfg(cfg_file=[], set_cfgs=None, default: CfgNode=None, logdir="log/") 
     # update cfg
     for f in cfg_file: # if no config file, this is empty list
         cfg.merge_from_file(f)
+
+    if isinstance(cfg.Loss.nullw, float):
+        print(f"Converting Loss.nullw from float: {cfg.Loss.nullw} to int")
+        cfg.Loss.nullw = int(cfg.Loss.nullw)
+
     if set_cfgs is not None:
         cfg.merge_from_list(new_set_cfgs)
     cfg.aux.cfg_file = cfg_file

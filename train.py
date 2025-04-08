@@ -4,9 +4,11 @@ import numpy as np
 import argparse
 import os
 import json
+import sys
 from torch import optim
 import torch
 import wandb
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 from .utils.dataset import DataLoader, create_dataset
 from .utils.evaluate import Checkpoint
