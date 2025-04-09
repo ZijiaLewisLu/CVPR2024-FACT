@@ -16,14 +16,14 @@ Loss:
   pc: 1.0
  
 train:
-  max_frames: 256
+  max_frames: 292
 
 data:
-  train_list: data/fsjump/train.txt
-  val_list: data/fsjump/val.txt
-  test_list: data/fsjump/test.txt
-  feature_dir: data/fsjump/features
-  label_dir: data/fsjump/labels
+  train_list: ../data/fsjump/train.txt
+  val_list: ../data/fsjump/val.txt
+  test_list: ../data/fsjump/test.txt
+  feature_dir: ../data/fsjump/features
+  label_dir: ../data/fsjump/labels
 
 aux:
   gpu: 0
@@ -31,6 +31,6 @@ aux:
   print_every: 5
   eval_every: 20
   wandb_project: fact-fsjump
-  wandb_user: your_username  # Replace with your wandb user
+  wandb_user: edo  # wandb user
   logdir: logs/fsjump/
   exp: dryrun

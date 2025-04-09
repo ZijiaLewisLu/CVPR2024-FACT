@@ -14,6 +14,8 @@ _C.aux.wandb_offline = False
 _C.aux.resume = "max" # "", ckpt_path, "max" (resume latest ckpt of the experiment)
 _C.aux.eval_every = 1000
 _C.aux.print_every = 200
+_C.aux.logdir = "logs/fsjump/" # logdir
+_C.aux.exp = "dryrun"
 
 # dataset
 _C.dataset = "fsjump"
@@ -22,6 +24,8 @@ _C.sr = 1 # temporal down-sample rate
 _C.eval_bg = False # if including background frame in evaluation
 
 # training
+_C.train = CN()
+_C.train.max_frames = 292
 _C.batch_size = 4
 _C.optimizer = "SGD"
 _C.epoch = 2
@@ -107,6 +111,15 @@ Loss.nullw = -1 # weight for null class in action token; -1 -> auto-compute from
 Loss.sw = 0.0 # weight for smoothing loss
 
 #########################
+# Data
+_C.data = CN()
+_C.data.train_list = "../data/fsjump/train.txt"
+_C.data.val_list = "../data/fsjump/val.txt"
+_C.data.test_list = "../data/fsjump/test.txt"
+_C.data.feature_dir = "../data/fsjump/features"
+_C.data.label_dir = "../data/fsjump/labels"
+
+#########################
 # temporal masking
 _C.TM = TM = CN()
 TM.use = False
@@ -117,6 +130,3 @@ TM.inplace = True
 
 def get_cfg_defaults():
     return _C.clone()
-
-
-

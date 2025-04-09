@@ -44,7 +44,7 @@ def create_dataset(cfg: CfgNode):
         processed_samples = []
         for i in range(len(dataset)):
             x, y = dataset[i]
-            # 🔁 Expand scalar label into per-frame label if needed
+            # Expand scalar label into per-frame label if needed
             if y.ndim == 0 or y.shape == ():  # scalar label
                 y = torch.full((x.shape[0],), int(y.item()), dtype=torch.long)
             processed_samples.append((x, y))

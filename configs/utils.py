@@ -170,7 +170,7 @@ def _get_var(c, ks: list, delete=False):
 #     return cfg
 
 def setup_cfg(cfg_file=[], set_cfgs=None, default: CfgNode=None, logdir="log/") -> CfgNode:
-    print("✅ setup_cfg() is called!")
+    print("setup_cfg() is called!")
     """
     update default cfg according to cmd line input
     and automatic generate experiment name
