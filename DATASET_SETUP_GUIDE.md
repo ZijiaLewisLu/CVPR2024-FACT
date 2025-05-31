@@ -1,14 +1,10 @@
 # FACT Dataset Setup Guide
 
-This guide explains how to prepare new datasets and generate configuration files for training FACT (Fine-grained Action Counting and Temporal localization) models.
-
-## Overview
-
-The `gen_config.py` script automatically analyzes your dataset and generates optimized YAML configuration files for FACT training. It computes dataset statistics and sets appropriate model parameters based on your data characteristics.
+This guide explains how to prepare new datasets and generate configuration files for training FACT models.
 
 ## Dataset Requirements
 
-Your dataset must be organized with the following structure:
+Your dataset should be organized with the following structure:
 
 ```
 your_dataset/
