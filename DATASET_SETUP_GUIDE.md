@@ -8,16 +8,16 @@ Your dataset should be organized with the following structure:
 
 ```
 your_dataset/
-├── features/              # Video features (.npy files) [Optional]
+├── features/              # Video features (.npy files)
 │   ├── video1.npy
 │   ├── video2.npy
 │   └── ...
-├── groundTruth/          # Frame-level action labels (.txt files) [Required]
+├── groundTruth/          # Frame-level action labels (.txt files) 
 │   ├── video1.txt
 │   ├── video2.txt
 │   └── ...
-├── mapping.txt           # Action class mapping file [Required]
-└── splits/              # Train/test splits [Optional]
+├── mapping.txt           # Action class mapping file 
+└── splits/              # Train/test splits 
     ├── train.split1.bundle
     ├── test.split1.bundle
     └── ...
