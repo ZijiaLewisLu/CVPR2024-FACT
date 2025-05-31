@@ -143,8 +143,10 @@ def create_dataset(cfg: CfgNode):
         test_split_fname = BASE + f'data/breakfast/splits/test.{cfg.split}.bundle'
         feature_path = BASE + 'data/breakfast/features'
         feature_transpose = True
-        average_transcript_len = 6.9 
+        if cfg.Loss.match == 'o2o':
+            average_transcript_len = 6.9 
         bg_class = [0] 
+        groundTruth_path = os.path.join(dataset_path, 'groundTruth')
 
     elif cfg.dataset == "gtea":
         map_fname = BASE + 'data/gtea/mapping.txt'
@@ -153,8 +155,10 @@ def create_dataset(cfg: CfgNode):
         train_split_fname = BASE + f'data/gtea/splits/train.{cfg.split}.bundle'
         test_split_fname = BASE + f'data/gtea/splits/test.{cfg.split}.bundle'
         feature_transpose = True
-        average_transcript_len = 32.9
+        if cfg.Loss.match == 'o2o':
+            average_transcript_len = 32.9
         bg_class = [10]
+        groundTruth_path = os.path.join(dataset_path, 'groundTruth')
 
     elif cfg.dataset == "ego":
         map_fname = BASE + 'data/egoprocel/mapping.txt'
@@ -168,6 +172,7 @@ def create_dataset(cfg: CfgNode):
             average_transcript_len = 21.5
         else: # for one-to-many matching
             average_transcript_len = 7.4
+        groundTruth_path = os.path.join(dataset_path, 'groundTruth')
 
     elif cfg.dataset == "epic":
         map_fname = BASE + 'data/epic-kitchens/processed/mapping.txt'
@@ -179,10 +184,20 @@ def create_dataset(cfg: CfgNode):
         feature_transpose = False
         if cfg.Loss.match == 'o2o':
             average_transcript_len = 165
-        else:
+        else: # for one-to-many matching
             average_transcript_len = 52
+        groundTruth_path = os.path.join(dataset_path, 'groundTruth')
+
+    else: # if dataset data is not defined here, try reading from the config file
+        map_fname = cfg.map_fname
+        feature_path = cfg.feature_path
+        groundTruth_path = cfg.groundTruth_path
+        train_split_fname = os.path.join(cfg.split_path, f'train.{cfg.split}.bundle')
+        test_split_fname = os.path.join(cfg.split_path, f'test.{cfg.split}.bundle')
+        feature_transpose = cfg.feature_transpose
+        bg_class = cfg.bg_class if isinstance(cfg.bg_class, list) else [cfg.bg_class]
+        average_transcript_len = cfg.average_transcript_len
     
-    groundTruth_path = os.path.join(dataset_path, 'groundTruth')
 
     ################################################
     ################################################
@@ -199,6 +214,8 @@ def create_dataset(cfg: CfgNode):
             feature, label_for_training, label_for_evaluation
     """
     def load_video(vname):
+        if vname.endswith('.txt'):
+            vname = vname[:-4]
         feature = load_feature(feature_path, vname, feature_transpose) # should be T x D or T x D x H x W
 
         with open(os.path.join(groundTruth_path, vname + '.txt')) as f:

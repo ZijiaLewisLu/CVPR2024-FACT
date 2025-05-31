@@ -21,6 +21,17 @@ _C.split = "split1"
 _C.sr = 1 # temporal down-sample rate
 _C.eval_bg = False # if including background frame in evaluation
 
+# create dataset config variables to allow flexible dataset loading
+# if configs for <_C.dataset> cannot be found at utils/dataset.py
+# the code will try to read the following variables
+_C.feature_path = None
+_C.groundTruth_path = None
+_C.map_fname = None
+_C.split_path = None
+_C.feature_transpose = False # if the feature is T x D or D x T
+_C.bg_class = 0 # background class
+_C.average_transcript_len = 0.0 # average number of segments in
+
 # training
 _C.batch_size = 4
 _C.optimizer = "SGD"

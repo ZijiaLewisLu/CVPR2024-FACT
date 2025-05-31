@@ -47,6 +47,9 @@ python3 -m src.train --cfg src/configs/epic-kitchens.yaml --set aux.gpu 0 split 
 ```
 By default, log will be saved to `FACT_actseg/log/<experiment-path>`. Evaluation results are saved as `Checkpoint` objects defined [utils/evaluate.py](./utils/evaluate.py). Loss and metrics are also visualized with wandb.
 
+## Use your own data
+Please refer to [DATASET_SETUP_GUIDE.md](DATASET_SETUP_GUIDE.md) for setting up FACT code for new datasets.
+
 ## Pre-Trained Models
 Pre-trained model weights can be downloaded from [here](https://drive.google.com/drive/folders/1yj6bnVwdXZQrx-F29kpjin27Vd30zRnd?usp=sharing). You can place the files under `FACT_actseg/ckpts` and test the models with the following command.
 ```shell
