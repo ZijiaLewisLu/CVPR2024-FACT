@@ -24,8 +24,8 @@ Examples:
   python utils/gen_config.py --dataset_path /path/to/dataset --dataset_name new_dataset --output_config new_dataset.yaml --base_config configs/breakfast.yaml
 
 Tips:
-    * Use configs/gtea.yaml for small dataset.
-    * Set --match_mode to 'o2m' if videos often contain many repeated actions.
+    * Use '--base_config configs/gtea.yaml' for small dataset.
+    * Use '--match_mode o2m' if videos often contain many repeated actions.
         """
     )
 
