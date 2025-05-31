@@ -37,7 +37,8 @@ def evaluate(global_step, net, testloader, run, savedir):
         string += "%s:%.1f, " % (k, v)
         log_dict[f'test-metric/{k}'] = v
     print(string + '\n')
-    run.log(log_dict, step=global_step+1)
+    if run is not None:
+        run.log(log_dict, step=global_step+1)
 
     fname = "%d.gz" % (global_step+1) 
     ckpt.save(os.path.join(savedir, fname))
@@ -82,14 +83,18 @@ if __name__ == '__main__':
     os.makedirs(savedir, exist_ok=True)
     print('Saving log at', logdir)
 
-    run = wandb.init(
-                project=cfg.aux.wandb_project, entity=cfg.aux.wandb_user,
-                dir=cfg.aux.logdir,
-                group=cfg.aux.exp, resume="allow",
-                config=cfg2flatdict(cfg),
-                reinit=True, save_code=False,
-                mode="offline" if cfg.aux.debug else "online",
-                )
+    try:
+        run = wandb.init(
+                    project=cfg.aux.wandb_project, entity=cfg.aux.wandb_user,
+                    dir=cfg.aux.logdir,
+                    group=cfg.aux.exp, resume="allow",
+                    config=cfg2flatdict(cfg),
+                    reinit=True, save_code=False,
+                    mode="offline" if cfg.aux.debug else "online",
+                    )
+    except Exception as e:
+        print("WARNING: Failed to initialize wandb.")
+        run = None
 
     argSaveFile = os.path.join(logdir, 'args.json')
     with open(argSaveFile, 'w') as f:
@@ -177,7 +182,8 @@ if __name__ == '__main__':
                     log_dict['train-metric/'+k] = v
                 print(string)
 
-                run.log(log_dict, step=global_step+1)
+                if run is not None:
+                    run.log(log_dict, step=global_step+1)
 
                 ckpt = Checkpoint(-1, bg_class=(dataset.bg_class if cfg.eval_bg else []), eval_edit=False)
 
@@ -202,7 +208,8 @@ if __name__ == '__main__':
     best_ckpt.eval_edit = True
     best_ckpt.compute_metrics()
     best_ckpt.save(os.path.join(logdir, 'best_ckpt.gz'))
-    run.finish()
+    if run is not None:
+        run.finish()
 
     # create a file to mark this experiment has completed
     finish_proof_fname = os.path.join(logdir, "FINISH_PROOF")
